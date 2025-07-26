@@ -1,6 +1,7 @@
 from datetime import datetime
 
 def buy_coin(user_id, coin_id, coin_name, coin_price, client):
+    coin_price = float(str(coin_price).replace("Rs.", "").replace(",", "").strip())
     user_data = client.table("users").select("balance").eq("userid", user_id).execute().data
     if not user_data:
         return False, "User not found."
